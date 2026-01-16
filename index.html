@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excavadora 3D - Práctica 3 PAG (Three.js)</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            display: block;
+        }
+
+        .controles {
+            position: absolute;
+            top: 10px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border-radius: 10px;
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+        }
+        #controlesCamara {
+            left: 10px;
+            max-width: 300px;
+        }
+        #controlesExcavadora {
+            right: 10px;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 15px;
+            background: #228B22;
+            font-size: 15px;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #3CB371;
+            color: black;
+        }
+        button:active {
+            background: #90EE90;
+        }
+        .control-grupo {
+            margin: 10px 0;
+            border-top: 1px solid #555;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="controlesCamara" class="controles">
+    <h3>Excavadora 3D</h3>
+    <p><strong>Controles de cámara:</strong></p>
+    <span style="font-size: 15px;">• Click izquierdo + arrastrar: Rotar<br>
+        • Click derecho + arrastrar: Desplazar<br>
+        • Rueda del ratón: Zoom</span>
+    <div class="control-grupo">
+        <strong>Seguimiento:</strong><br>
+        <button id="botonFoco" onclick="toggleFocoSeguimiento()">🔦 Foco: <span id="estadoFoco">Fijo</span></button><br>
+        <button  id="botonCamara" onclick="toggleCamaraSeguimiento()">📷 Cámara: <span id="estadoCamara">Libre</span></button>
+    </div>
+</div>
+
+<div id="controlesExcavadora" class="controles">
+    <h3>Controles de Excavadora</h3>
+    <div class="control-grupo">
+        <strong>Cabina:</strong><br>
+        <button onmousedown="iniciarRotacionCabina(-1)" onmouseup="detenerRotacionCabina()" onmouseleave="detenerRotacionCabina()">← Girar Izq (A)</button>
+        <button onmousedown="iniciarRotacionCabina(1)" onmouseup="detenerRotacionCabina()" onmouseleave="detenerRotacionCabina()">Girar Der → (D)</button>
+    </div>
+    <div class="control-grupo">
+        <strong>Brazo Principal:</strong><br>
+        <button onmousedown="iniciarMovimientoBrazo1(-1)" onmouseup="detenerMovimientoBrazo1()" onmouseleave="detenerMovimientoBrazo1()">↑ Subir (W)</button>
+        <button onmousedown="iniciarMovimientoBrazo1(1)" onmouseup="detenerMovimientoBrazo1()" onmouseleave="detenerMovimientoBrazo1()">↓ Bajar (S)</button>
+    </div>
+    <div class="control-grupo">
+        <strong>Brazo Secundario:</strong><br>
+        <button onmousedown="iniciarMovimientoBrazo2(-1)" onmouseup="detenerMovimientoBrazo2()" onmouseleave="detenerMovimientoBrazo2()">↑ Extender (E)</button>
+        <button onmousedown="iniciarMovimientoBrazo2(1)" onmouseup="detenerMovimientoBrazo2()" onmouseleave="detenerMovimientoBrazo2()">↓ Contraer (R)</button>
+    </div>
+    <div class="control-grupo">
+        <strong>Cuchara:</strong><br>
+        <button onmousedown="iniciarMovimientoCuchara(-1)" onmouseup="detenerMovimientoCuchara()" onmouseleave="detenerMovimientoCuchara()">↑ Abrir (F)</button>
+        <button onmousedown="iniciarMovimientoCuchara(1)" onmouseup="detenerMovimientoCuchara()" onmouseleave="detenerMovimientoCuchara()">↓ Cerrar (C)</button>
+    </div>
+    <div class="control-grupo">
+        <strong>Desplazamiento:</strong><br>
+        <span style="font-size: 15px;">Usar teclas de flecha ⬆️ ⬇️ ⬅️ ➡️</span>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script  src="script.js"></script>
+
+</body>
+</html>
